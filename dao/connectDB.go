@@ -62,26 +62,11 @@ func checkerr(err error) error {
 CheckAccount check account
 */
 func CheckAccount(username string, password string) (*sql.Row, bool) {
-	type Acc struct {
-		Username string
-		Email    string
-		Password string
-		Phone    string
-		ShowName string
-		Birthday string
-	}
 	var stringQuery = "SELECT * FROM account WHERE username = '" + username + "' AND password = '" + password + "'"
-	var temp int
 	result := connectDB().QueryRow(stringQuery)
 	if result == nil {
 		return nil, false
 	}
-	var username1, email, password1, phone, showname, birthday string
-	err := result.Scan(&temp, &username1, &email, &password1, &phone, &showname, &birthday)
-	if err != nil {
-		panic(err.Error())
-	}
-	Println(username1)
 	defer connectDB().Close()
 	return result, true
 }
