@@ -2,7 +2,6 @@ package dao
 
 import (
 	"database/sql"
-	. "fmt"
 	"strconv"
 
 	_ "github.com/go-sql-driver/mysql"
