@@ -60,12 +60,9 @@ func checkerr(err error) error {
 /*
 CheckAccount check account
 */
-func CheckAccount(username string, password string) (*sql.Row, bool) {
+func CheckAccount(username string, password string) *sql.Row {
 	var stringQuery = "SELECT * FROM account WHERE username = '" + username + "' AND password = '" + password + "'"
 	result := connectDB().QueryRow(stringQuery)
-	if result == nil {
-		return nil, false
-	}
 	defer connectDB().Close()
-	return result, true
+	return result
 }
