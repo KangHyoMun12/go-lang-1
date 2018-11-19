@@ -61,8 +61,12 @@ func checkerr(err error) error {
 CheckAccount check account
 */
 func CheckAccount(username string, password string) *sql.Row {
-	var stringQuery = "SELECT * FROM account WHERE username = '" + username + "' AND password = '" + password + "'"
-	result := connectDB().QueryRow(stringQuery)
+	//var stringQuery = "SELECT * FROM account WHERE username = '" + username + "' AND password = '" + password + "'"
+	sqlprepare, err := connectDB().Prepare("SELECT * FROM account WHERE username = ? AND password = ?")
+	if err != nil {
+		panic(err.Error())
+	}
+	result := sqlprepare.QueryRow(username, password)
 	defer connectDB().Close()
 	return result
 }
