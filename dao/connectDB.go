@@ -77,7 +77,7 @@ func CheckAccount(username string, password string) (*sql.Row, bool) {
 		return nil, false
 	}
 	var username1, email, password1, phone, showname, birthday string
-	err := result.Scan(temp, &username1, &email, &password1, &phone, &showname, &birthday)
+	err := result.Scan(&temp, &username1, &email, &password1, &phone, &showname, &birthday)
 	if err != nil {
 		panic(err.Error())
 	}
