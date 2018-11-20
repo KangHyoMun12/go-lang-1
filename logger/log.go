@@ -17,7 +17,7 @@ func loadAppConfig() {
 	// if err != nil {
 	// 	panic(err.Error())
 	// }
-	file, err := ioutil.ReadFile("log.xml")
+	file, err := ioutil.ReadFile("/logger/log.xml")
 	if err != nil {
 		panic(err.Error())
 	}
