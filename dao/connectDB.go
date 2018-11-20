@@ -70,3 +70,16 @@ func CheckAccount(username string, password string) *sql.Row {
 	defer connectDB().Close()
 	return result
 }
+
+/*
+AddAccount add acc
+*/
+func AddAccount(username string, email string, password string, phone string, showname string, birthday string) error {
+	sqlprepare, err := connectDB().Prepare("INSERT INTO account VALUES(?,?,?,?,?,?)")
+	defer connectDB().Close()
+	if err != nil {
+		panic(err.Error())
+	}
+	_, err = sqlprepare.Exec(username, email, password, phone, showname, birthday)
+	return err
+}
