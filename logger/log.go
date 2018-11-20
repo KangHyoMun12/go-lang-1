@@ -12,17 +12,11 @@ Logger log
 var Logger seelog.LoggerInterface
 
 func loadAppConfig() {
-	appConfig := `<seelog minlevel="warn">
-    <outputs formatid="common">
-        <rollingfile type="size" filename="./logs/roll.log" maxsize="100000" maxrolls="5"/>
-    </outputs>
-    <formats>
-        <format id="common" format="%Date/%Time [%LEV] %Msg%n" />
-	    <format id="critical" format="%File %FullPath %Func %Msg%n" />
-	    <format id="criticalemail" format="Critical error on our server!\n    %Time %Date %RelFile %Func %Msg \nSent by Seelog"/>
-    </formats>
-</seelog>`
-	logger, err := seelog.LoggerFromConfigAsBytes([]byte(appConfig))
+	// appConfig, err := os.Open("log.xml")
+	// if err != nil {
+	// 	panic(err.Error())
+	// }
+	logger, err := seelog.LoggerFromConfigAsFile("/log.xml")
 	// logger, err := seelog.LoggerFromConfigAsFile("./logger/log.xml")
 	if err != nil {
 		fmt.Println(err)
