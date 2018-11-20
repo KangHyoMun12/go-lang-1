@@ -75,7 +75,7 @@ func CheckAccount(username string, password string) *sql.Row {
 AddAccount add acc
 */
 func AddAccount(username string, email string, password string, phone string, showname string, birthday string) error {
-	sqlprepare, err := connectDB().Prepare("INSERT INTO account VALUES(?,?,?,?,?,?)")
+	sqlprepare, err := connectDB().Prepare("INSERT INTO account(username,email,`password`,`phone`,showname,birthday) VALUES(?,?,?,?,?,?)")
 	defer connectDB().Close()
 	if err != nil {
 		panic(err.Error())
