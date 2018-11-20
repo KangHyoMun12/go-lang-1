@@ -2,7 +2,6 @@ package logger
 
 import (
 	"fmt"
-	"io/ioutil"
 
 	seelog "github.com/cihub/seelog"
 )
@@ -13,16 +12,20 @@ Logger log
 var Logger seelog.LoggerInterface
 
 func loadAppConfig() {
-	// appConfig, err := os.Open("log.xml")
-	// if err != nil {
-	// 	panic(err.Error())
-	// }
-	file, err := ioutil.ReadFile("/logger/log.xml")
-	if err != nil {
-		panic(err.Error())
-	}
-	logger, err := seelog.LoggerFromConfigAsBytes(file)
-	// logger, err := seelog.LoggerFromConfigAsFile("./logger/log.xml")
+	appConfig := `
+	<?xml version="1.0" encoding="UTF-8"?>
+	<seelog minlevel="warn">
+		<outputs formatid="common">
+			<rollingfile type="size" filename="./logs/roll.log" maxsize="100000" maxrolls="5"/>
+		</outputs>
+		<formats>
+			<format id="common" format="%Date/%Time [%LEV] %Msg%n" />
+			<format id="critical" format="%File %FullPath %Func %Msg%n" />
+			<format id="criticalemail" format="Critical error on our server!\n    %Time %Date %RelFile %Func %Msg \nSent by Seelog"/>
+		</formats>
+	</seelog>
+	`
+	logger, err := seelog.LoggerFromConfigAsBytes([]byte(appConfig))
 	if err != nil {
 		fmt.Println(err)
 		return
