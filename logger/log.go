@@ -15,12 +15,6 @@ func loadAppConfig() {
 	appConfig := `<seelog minlevel="warn">
     <outputs formatid="common">
         <rollingfile type="size" filename="./logs/roll.log" maxsize="100000" maxrolls="5"/>
-		<filter levels="critical">
-            <file path="/data/logs/critical.log" formatid="critical"/>
-            <smtp formatid="criticalemail" senderaddress="leovthat215@gmail.com" sendername="ShortUrl API" hostname="smtp.gmail.com" hostport="587" username="leovthat215@gmail.com" password="tamsuthatedu9x">
-                <recipient address="nvthat@tma.com.vn"/>
-            </smtp>
-        </filter>
     </outputs>
     <formats>
         <format id="common" format="%Date/%Time [%LEV] %Msg%n" />
