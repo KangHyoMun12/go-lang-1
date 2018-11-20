@@ -13,11 +13,12 @@ var Logger seelog.LoggerInterface
 
 func loadAppConfig() {
 	appConfig := `
+	<?xml version="1.0" encoding="UTF-8"?>
 	<seelog minlevel="warn">
     <outputs formatid="common">
-        <rollingfile type="size" filename="/data/logs/roll.log" maxsize="100000" maxrolls="5"/>
+        <rollingfile type="size" filename="/Golang/Programs/StartWebWithGo/roll.log" maxsize="100000" maxrolls="5"/>
 		<filter levels="critical">
-            <file path="/data/logs/critical.log" formatid="critical"/>
+            <file path="/Golang/Programs/StartWebWithGo/critical.log" formatid="critical"/>
             <smtp formatid="criticalemail" senderaddress="astaxie@gmail.com" sendername="ShortUrl API" hostname="smtp.gmail.com" hostport="587" username="mailusername" password="mailpassword">
                 <recipient address="xiemengjun@gmail.com"/>
             </smtp>
