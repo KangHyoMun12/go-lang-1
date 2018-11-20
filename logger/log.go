@@ -14,7 +14,7 @@ var Logger seelog.LoggerInterface
 func loadAppConfig() {
 	appConfig := `
 	<?xml version="1.0" encoding="UTF-8"?>
-	<seelog minlevel="warn">
+	<seelog minlevel="info">
     <outputs formatid="common">
         <rollingfile type="size" filename="/Golang/Programs/StartWebWithGo/roll.log" maxsize="100000" maxrolls="5"/>
 		<filter levels="critical">
