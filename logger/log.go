@@ -2,6 +2,7 @@ package logger
 
 import (
 	"fmt"
+	"io/ioutil"
 
 	seelog "github.com/cihub/seelog"
 )
@@ -16,7 +17,11 @@ func loadAppConfig() {
 	// if err != nil {
 	// 	panic(err.Error())
 	// }
-	logger, err := seelog.LoggerFromConfigAsFile("/log.xml")
+	file, err := ioutil.ReadFile("log.xml")
+	if err != nil {
+		panic(err.Error())
+	}
+	logger, err := seelog.LoggerFromConfigAsBytes(file)
 	// logger, err := seelog.LoggerFromConfigAsFile("./logger/log.xml")
 	if err != nil {
 		fmt.Println(err)
