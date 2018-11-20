@@ -17,17 +17,9 @@ func loadAppConfig() {
 	<seelog minlevel="trace">
     <outputs formatid="common">
         <rollingfile type="size" filename="/Golang/Programs/StartWebWithGo/logs/roll.log" maxsize="100000" maxrolls="5"/>
-		<filter levels="critical">
-            <file path="/Golang/Programs/StartWebWithGo/critical.log" formatid="critical"/>
-            <smtp formatid="criticalemail" senderaddress="leovthat215@gmail.com" sendername="ShortUrl API" hostname="mail.google.com" hostport="587" username="leovthat215@gmail.com" password="tamsuthatedu9x">
-                <recipient address="nvthat@tma.com.vn"/>
-            </smtp>
-        </filter>
     </outputs>
     <formats>
         <format id="common" format="%Date/%Time [%LEV] %Msg%n" />
-	    <format id="critical" format="%File %FullPath %Func %Msg%n" />
-	    <format id="criticalemail" format="Critical error on our server!\n    %Time %Date %RelFile %Func %Msg \nSent by Seelog"/>
     </formats>
 </seelog>
 	`
