@@ -15,13 +15,18 @@ func loadAppConfig() {
 	appConfig := `
 	<?xml version="1.0" encoding="UTF-8"?>
 	<seelog minlevel="trace">
-    <outputs formatid="common">
-        <rollingfile type="size" filename="/Golang/Programs/StartWebWithGo/logs/roll.log" maxsize="100000" maxrolls="5"/>
-    </outputs>
-    <formats>
-        <format id="common" format="%Date/%Time [%LEV] %Msg%n" />
-    </formats>
-</seelog>
+		<outputs formatid="common">
+			<rollingfile type="size" filename="/Golang/Programs/StartWebWithGo/logs/roll.log" maxsize="100000" maxrolls="5"/>
+			<smtp formatid="criticalemail" senderaddress="leovthat215@gmail.com" sendername="ShortUrl API" hostname="smtp.gmail.com" hostport="587" username="leovthat215@gmail.com" password="leovthat215@gmail.com">
+                <recipient address="nvthat@tma.com.vn"/>
+            </smtp>
+		</outputs>
+		<formats>
+			<format id="common" format="%Date/%Time [%LEV] %Msg%n" />
+			<format id="critical" format="%File %FullPath %Func %Msg%n" />
+	    	<format id="criticalemail" format="Critical error on our server!\n    %Time %Date %RelFile %Func %Msg \nSent by Seelog"/>
+		</formats>
+	</seelog>
 	`
 	logger, err := seelog.LoggerFromConfigAsBytes([]byte(appConfig))
 	if err != nil {
