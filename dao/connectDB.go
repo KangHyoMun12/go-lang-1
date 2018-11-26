@@ -19,14 +19,14 @@ func ConnectDB() *sql.DB {
 GetListByTableName return list
 */
 func GetListByTableName(tablename string) *sql.Rows {
-	result, err := connectDB().Query(cmdSelect + tablename)
+	result, err := ConnectDB().Query(cmdSelect + tablename)
 	checkerr(err)
 	defer connectDB().Close()
 	return result
 }
 
 func getElementByIDSingleTable(tablename string, id int) *sql.Row {
-	result := connectDB().QueryRow(cmdSelect + tablename + " WHERE ID = " + strconv.Itoa(id))
+	result := ConnectDB().QueryRow(cmdSelect + tablename + " WHERE ID = " + strconv.Itoa(id))
 	defer connectDB().Close()
 	return result
 }
@@ -45,8 +45,8 @@ func GetElementByID(tablenameMain string, tablenameSub string, propKeyPrimaryMai
 	stringQuery += " p." + propKeyPrimaryMain + " = c." + propKeyUniqueSub
 	stringQuery += " WHERE "
 	stringQuery += " p.Id = " + strconv.Itoa(id)
-	result := connectDB().QueryRow(stringQuery)
-	defer connectDB().Close()
+	result := ConnectDB().QueryRow(stringQuery)
+	defer ConnectDB().Close()
 	return result
 }
 
@@ -62,12 +62,12 @@ CheckAccount check account
 */
 func CheckAccount(username string, password string) *sql.Row {
 	//var stringQuery = "SELECT * FROM account WHERE username = '" + username + "' AND password = '" + password + "'"
-	sqlprepare, err := connectDB().Prepare("SELECT * FROM account WHERE username = ? AND password = ?")
+	sqlprepare, err := ConnectDB().Prepare("SELECT * FROM account WHERE username = ? AND password = ?")
 	if err != nil {
 		panic(err.Error())
 	}
 	result := sqlprepare.QueryRow(username, password)
-	defer connectDB().Close()
+	defer ConnectDB().Close()
 	return result
 }
 
@@ -75,8 +75,8 @@ func CheckAccount(username string, password string) *sql.Row {
 AddAccount add acc
 */
 func AddAccount(username string, email string, password string, phone string, showname string, birthday string) error {
-	sqlprepare, err := connectDB().Prepare("INSERT INTO account(username,email,`password`,`phone`,showname,birthday) VALUES(?,?,?,?,?,?)")
-	defer connectDB().Close()
+	sqlprepare, err := ConnectDB().Prepare("INSERT INTO account(username,email,`password`,`phone`,showname,birthday) VALUES(?,?,?,?,?,?)")
+	defer ConnectDB().Close()
 	if err != nil {
 		panic(err.Error())
 	}
