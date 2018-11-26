@@ -21,13 +21,13 @@ GetListByTableName return list
 func GetListByTableName(tablename string) *sql.Rows {
 	result, err := ConnectDB().Query(cmdSelect + tablename)
 	checkerr(err)
-	defer connectDB().Close()
+	defer ConnectDB().Close()
 	return result
 }
 
 func getElementByIDSingleTable(tablename string, id int) *sql.Row {
 	result := ConnectDB().QueryRow(cmdSelect + tablename + " WHERE ID = " + strconv.Itoa(id))
-	defer connectDB().Close()
+	defer ConnectDB().Close()
 	return result
 }
 
