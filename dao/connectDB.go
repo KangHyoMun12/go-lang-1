@@ -10,7 +10,12 @@ import (
 const cmdSelect string = "SELECT * FROM "
 
 func ConnectDB() *sql.DB {
-	db, err := sql.Open("mysql", "root:@(127.0.0.1:3306)/trees")
+	urlconnect := "thonghv:Thong2012@X@(db4free.net:3306)/db_demo"
+	db, err := sql.Open("mysql", urlconnect)
+	if err != nil {
+		//db, err = sql.Open("mysql", "root:@(127.0.0.1:3306)/trees")
+		checkerr(err)
+	}
 	checkerr(err)
 	return db
 }
