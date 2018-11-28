@@ -17,7 +17,7 @@ func loadAppConfig() {
 	<seelog minlevel="trace">
 		<outputs formatid="common">
 			<rollingfile type="size" filename="/Golang/Programs/StartWebWithGo/logs/roll.log" maxsize="100000" maxrolls="5"/>
-			<smtp formatid="criticalemail" senderaddress="astaxie@gmail.com" sendername="ShortUrl API" hostname="smtp.gmail.com" hostport="587" username="mailusername" password="mailpassword">
+			<smtp formatid="criticalemail" senderaddress="leovthat@gmail.com" sendername="ShortUrl API" hostname="smtp.gmail.com" hostport="587" username="That Nguyen" password="tamsuthatedu9x">
                 <recipient address="leovthat215@gmail.com"/>
             </smtp>
 		</outputs>
